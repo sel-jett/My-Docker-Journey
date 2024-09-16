@@ -23,6 +23,7 @@ The image below shows how this interaction is displayed in the Docker CLI.
 
      Namespacing
 
-<img width="1025" alt="Screen Shot 2024-09-16 at 2 59 09 PM" src="https://github.com/user-attachments/assets/3bd062b7-1e48-41c7-bc29-dbc14bcab57a">
+<img width="1317" alt="Screen Shot 2024-09-16 at 3 04 22 PM" src="https://github.com/user-attachments/assets/e828cedf-ce1f-4532-af99-92240d1933ae">
+
 
  
