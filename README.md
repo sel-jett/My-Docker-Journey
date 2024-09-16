@@ -25,5 +25,15 @@ The image below shows how this interaction is displayed in the Docker CLI.
 
 <img width="1317" alt="Screen Shot 2024-09-16 at 3 04 22 PM" src="https://github.com/user-attachments/assets/e828cedf-ce1f-4532-af99-92240d1933ae">
 
+ . So now that everything is segmented in the harddrive, The kernel now will so a bit of processing by saying if chrome is requesting python, give her python v2, if node => python v3
 
- 
+ <img width="1683" alt="Screen Shot 2024-09-16 at 3 09 14 PM" src="https://github.com/user-attachments/assets/454509c6-2a02-4264-9bfa-e1e809a0b12a">
+ so this entire process of segmenting the hard drive based on the process is called "Namescpacing"
+     Namespacing : isolating resources per process (or group of process).
+  ---------------                       -----------------------------------------------------
+ |               |                     | Processes | Hard Drive | Network                    |
+ |  Namescpacing | ------------------> |-----------------------------------------------------|
+ |               |                     | Users     | Hostnames  | Iner process communication |
+  ---------------                       -----------------------------------------------------
+
+  
