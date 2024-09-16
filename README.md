@@ -46,4 +46,4 @@ so now that we have a basic idea of how our system work, we can define a contain
 
 # Relations between images and containers :
 
-    <img width="1339" alt="Screen Shot 2024-09-16 at 2 52 26 PM" src="https://github.com/user-attachments/assets/b4c34163-a455-40e1-a26c-a008864bda52">
+ <img width="1339" alt="Screen Shot 2024-09-16 at 2 52 26 PM" src="https://github.com/user-attachments/assets/b4c34163-a455-40e1-a26c-a008864bda52">
