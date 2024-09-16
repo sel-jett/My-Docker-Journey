@@ -1,6 +1,6 @@
 # Basic Docker Commands: A Deep Dive
 
-Let’s start with the fundamental Docker command: "docker run hello-world". This command illustrates how the Docker CLI interacts with the Docker server to retrieve the necessary image.
+Let’s start with the fundamental Docker command: ```docker run hello-world```. This command illustrates how the Docker CLI interacts with the Docker server to retrieve the necessary image.
 
 Here’s a breakdown of the process:
 
