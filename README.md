@@ -40,3 +40,10 @@ Namespacing: Isolating resources per process (or group of processes).
          ---------------                       -----------------------------------------------------
 
   
+so now that we have a basic idea of how our system work, we can define a container as set of processes that has a grouping of ressources speceficly assigned to it
+
+<img width="1389" alt="Screen Shot 2024-09-16 at 3 33 03 PM" src="https://github.com/user-attachments/assets/845c81ad-e8ee-4f9d-8042-304dc3fbcb30">
+
+# Relations between images and containers :
+
+    <img width="1339" alt="Screen Shot 2024-09-16 at 2 52 26 PM" src="https://github.com/user-attachments/assets/b4c34163-a455-40e1-a26c-a008864bda52">
