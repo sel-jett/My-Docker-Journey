@@ -56,3 +56,84 @@ image : FS Snapshot, (a copy paste of a very specific of directories or files, s
 
    so here is what happens when we take an image and turn it into a container, first off the kernel will isolate a little section of the hard drive and make it avaliable to just this conatiner, then the File snapshot inside this image will be taken and placed whit in that little segment of the harddrive, Finally when we execute the starting command (Run Chrome), the n chrome is invoked and we create a an instance of that process that will be isolated into that set of resources inside the comntainer
 <img width="857" alt="Screen Shot 2024-10-26 at 11 04 22 AM" src="https://github.com/user-attachments/assets/d11e4574-d546-4d87-b7b1-06a95b3cff38">
+
+# How's Docker running on your Computer ?
+ 
+<img width="1465" alt="Screen Shot 2024-10-26 at 11 16 16 AM" src="https://github.com/user-attachments/assets/ffc06fa3-966a-4746-bc38-1c5fb6997e8b">
+
+Those important 2 freatures that I lastly meantioned are unfortunatly not avaliable at every operating system, indeed they are specific to the Linux Operating system
+
+ When we installed Docker in Mac, we Installed a Linux Virtual Machine, so as long as Docker is running, we technicly have Linux VM running. So inside that linux VM we will have our containers running, and with that Linux kernel that will be in charge of isolating access and limiting access to different hardware resources on that computer  
+<img width="945" alt="Screen Shot 2024-10-26 at 11 21 29 AM" src="https://github.com/user-attachments/assets/809345cd-7a77-4a16-9941-8b9c5f46a761">
+
+   And we will notice that in the OS entry by running
+   
+            $- docker version
+<img width="579" alt="Screen Shot 2024-10-26 at 11 29 14 AM" src="https://github.com/user-attachments/assets/a62f0de3-2cde-4839-8bbf-2ad75c498970">
+
+# Overriding Default commands ?
+
+<img width="1653" alt="Screen Shot 2024-10-26 at 11 54 06 AM" src="https://github.com/user-attachments/assets/1997372e-8c84-4d15-a917-9bea81e80d38">
+
+       docker run busybox ls
+   <img width="579" alt="Screen Shot 2024-10-26 at 11 57 16 AM" src="https://github.com/user-attachments/assets/cc2c214b-6870-48cf-a533-be7314e7073d">
+
+       docker run hello-world ls
+   <img width="579" alt="Screen Shot 2024-10-26 at 11 59 02 AM" src="https://github.com/user-attachments/assets/0abb0a3b-34d8-42fa-b697-ec8989dfb783">
+
+<img width="1732" alt="Screen Shot 2024-10-26 at 12 00 32 PM" src="https://github.com/user-attachments/assets/9bbd3e57-cbfa-4514-844d-8a14cb4b0f39">
+   So basicly it works with busybox image because it contains the foundational elements of a Unix-like filesystem as a FS Snapshot. Unlike Hello-world which has only one file program that print this msg :
+
+                ```Hello from Docker!
+                    This message shows that your installation appears to be working correctly.
+
+                    To generate this message, Docker took the following steps:
+                    1. The Docker client contacted the Docker daemon.
+                    2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+                        (amd64)
+                    3. The Docker daemon created a new container from that image which runs the
+                        executable that produces the output you are currently reading.
+                    4. The Docker daemon streamed that output to the Docker client, which sent it
+                        to your terminal.
+
+                    To try something more ambitious, you can run an Ubuntu container with:
+                    $ docker run -it ubuntu bash
+
+                    Share images, automate workflows, and more with a free Docker ID:
+                     https://hub.docker.com/
+
+                    For more examples and ideas, visit:
+                     https://docs.docker.com/get-started/
+
+
+# Conatiner life cycle :
+    
+<img width="1354" alt="Screen Shot 2024-10-26 at 12 29 17 PM" src="https://github.com/user-attachments/assets/7e83a735-682f-43bb-9040-d5ea15ea1e1f">
+And here is the difference between both of create and start :
+<img width="1425" alt="Screen Shot 2024-10-26 at 12 30 27 PM" src="https://github.com/user-attachments/assets/96bf32ac-e501-40e3-9e3f-3af38b117954">
+    
+   . Creating a Container :
+ Creating a container is taking the FS Snapshot of the image and kind of prop it to be used to create  the conatiner (still yet no process is running) ;)
+<img width="1567" alt="Screen Shot 2024-10-26 at 12 32 06 PM" src="https://github.com/user-attachments/assets/8e51911f-d188-471d-a02d-2b18eb9d9db7">
+    
+   . Starting a Container :
+ Starting a container is executing the starting command that might be running the process Hello-World.
+<img width="2324" alt="Screen Shot 2024-10-26 at 12 38 50 PM" src="https://github.com/user-attachments/assets/73b2d812-3afb-47bc-a0ef-2d65410bc248">
+
+
+   . Creating and Starting a container:
+<img width="850" alt="Screen Shot 2024-10-26 at 12 42 55 PM" src="https://github.com/user-attachments/assets/3a34bce1-93bb-434f-8882-a33b1eb1b2ea">
+
+   You might notice that I added "-a" after "start", So "-a" makes docker watch for the output form the container and print it on my terminal !!
+
+   . Here's a list of commands for this chapter that musst be helpful
+
+    $- docker ps : list all running containers
+    $- docker ps --all: list all conatiners that they've been running on your computer(started or paused) and not deleted yet
+    $- docker system prune : Remove All stopped conatiners, all build cache, all networks not used by atleast one container, all dangling images
+
+   !!! Once overriding a container, start in it will always execute that overided command 
+
+
+
+
