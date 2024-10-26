@@ -134,6 +134,64 @@ And here is the difference between both of create and start :
 
    !!! Once overriding a container, start in it will always execute that overided command 
 
+   . "docker start <container id>" a real world senario:
+       imagine starting a container that takes a lot of time to load, by the time it should load you notice that nothing is printed. You'll stop the container and start it again whith -a, bu here commes a best alternative
+
+        docker logs <container id>
+        Thank me later ;)
+
+   . Here's a full example:
+   
+ <img width="810" alt="Screen Shot 2024-10-26 at 3 32 04 PM" src="https://github.com/user-attachments/assets/983bb228-5379-47a0-8baf-a21f7528aaa1">
+
+   . Stopping or Killing a Container:
+
+       stop a container:    docker stop <Container id>
+       kill a container:    docker kill <Container id>
+
+   When stopping a conatiner a hardware signal is sent to that primary process running on that container.
+    in case of "Docker Stop", we're sending a SIGTERM signal
+   we use docker stop when we want to stop a container and give it time to shut it self down and do some clean up (like saving some file, etc)
+    
+   <img width="1529" alt="Screen Shot 2024-10-26 at 3 45 06 PM" src="https://github.com/user-attachments/assets/a11eac50-0591-455b-8311-77bbbda9dc6e">
 
 
+   When Killing a container a hardware signal is sent to that primary process running omn that container.
+    in case of "Docker kill", we're sending a SIGKILL signal
+   We use docker kill when we want shut down immidiatly, and it get not to do any additional work
+   
+   <img width="1412" alt="Screen Shot 2024-10-26 at 3 53 31 PM" src="https://github.com/user-attachments/assets/cf6aad0e-9f8d-40b8-b2fd-705b5867e64d">
+
+        One Important note is When execute Docker stop <Container id>, if the container doesn't stop in 10 seconds, Docker Automaticly send a kill signal to that specific container
+
+# Multy Commands Container:
+
+   First, we run a container using 'docker run redis'. When we try to use the Redis CLI, we realize that the container is already running the Redis server as its default command. Therefore, we need to specify redis-cli as an additional command so it becomes as the image shows.
+   
+   <img width="871" alt="Screen Shot 2024-10-26 at 4 30 29 PM" src="https://github.com/user-attachments/assets/2af1d85e-5daf-4f1f-98d4-d1068571ad75">
+
+   . The command :
+
+          | Reference to docker client
+           ---------------------------
+             / \
+              |
+              |  | Run another command
+              |   --------------------
+              |    / \
+              |     |
+              |     |  | Allow us to provide input to the container
+              |     |   -------------------------------------------
+              |     |  / \
+              |     |   |
+              |     |   |  
+              |     |   |  | Id of a Container
+              |     |   |   ---------------------
+              |     |   |      / \
+              |     |   |       |
+              |     |   |       |        | Additional command
+              |     |   |       |         -------------------
+              |     |   |       |           / \
+                                             |
+           docker exec -it <container id> <command>
 
