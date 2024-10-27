@@ -195,3 +195,76 @@ And here is the difference between both of create and start :
                                              |
            docker exec -it <container id> <command>
 
+
+# Building a Docker Image:
+<img width="1817" alt="Screen Shot 2024-10-27 at 10 11 21 AM" src="https://github.com/user-attachments/assets/adab168c-017b-4c2d-8261-c096ba0ee037">
+First thing off, we start by writing a Dockerfile which is a configuration to define how our container should behave, then we pass it to the Docker cli which it's job to pass it to the docker server which will check every line of configuration of that Dockerfile and build a usable docker image
+
+   . Steps to rwite a docker file
+
+               Creating a Dockerfile
+          |   -------------------------------
+          |  | Specify a base image          |
+          |   -------------------------------
+          |  | Run some commands to install  |
+          |  | additional programs           |
+          |    ------------------------------
+          |  | Specify some commands to run  |
+          |  | on container startup          |
+          |   -------------------------------
+         \ /
+        FLOW
+
+   .With the new Build kit, much prograss is hidden when building an image which is something the legacy builder would not do.
+
+        To see the output you will have to pass the progress flag :
+        
+            docker build --progress=plain .
+        
+        Additionally, you can pass the no-cache flag to disable any caching:
+        
+            docker build --no-cache --progress=plain .
+
+        To disable Buildkit, you can just pass the following variable to the build command:
+
+            DOCKER_BUILDKIT=0 docker build .
+
+   Here's a Documentation to learn about Docker build, buildkit, buildx..... :
+   
+       https://docs.docker.com/build/
+
+   Example of a docker image :
+
+    # Step 1: Use an existing docker image as a base 
+    FROM alpine
+
+    # Step 2: Download and install dependency
+
+    RUN apk add --update redis
+
+    # Step 3: Tell the image what to do when it starts as container
+
+    CMD ["redis-server"]
+
+   . To run this image use 
+   
+    $- docker build .
+    $- docker run <image id>
+
+# What's a base image ?
+   .It's a valid existing Docker image in registry or locally, it serves the base structure for what we need to do whith that container.
+    in the exmaple we did, we used Alpine as the base image because we simply need apk(package manager that we need to install redis).
+    
+# steps of creating an image in legacy mode ( Not in buildkit !!!!!!):
+
+    .For a better understanding use this commande : 
+        $- DOCKER_BUILDKIT=0 docker build --progress plain .
+  
+  Here is the full steps:
+  
+  <img width="602" alt="Screen Shot 2024-10-27 at 3 41 10 PM" src="https://github.com/user-attachments/assets/c4b8c439-7e32-4ced-824b-fc2d8a99fbb6">
+
+  This commande will show you all the step of craeting an image and all created intermediate containers.
+      .Intermidiate containers are containers that're created to execute a steps and take a snapshot for that container before removing it
+      . buildkit doesn't create intermediate containers and it's images are not videble to docker run and you can't use --rm=false !!
+go search for --debugger flag.
