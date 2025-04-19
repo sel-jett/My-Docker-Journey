@@ -268,3 +268,35 @@ First thing off, we start by writing a Dockerfile which is a configuration to de
       .Intermidiate containers are containers that're created to execute a steps and take a snapshot for that container before removing it
       . buildkit doesn't create intermediate containers and it's images are not videble to docker run and you can't use --rm=false !!
 go search for --debugger flag.
+
+# Commands:
+  . Liste all images:
+
+    $ docker images || docker image ls
+  . Pull image:
+
+    $ docker pull (image name if exist in docker hub
+  . Launch a container from a docker image:
+
+    $ docker run -it (image name) /bin/bash
+    (-it means -interactive -tty)
+    OR
+    $ docker run -d --name (container name) --publish (port:port) (image name)
+    "-d means detach" 
+  . List all running processes inside a container
+
+        $ ps -elf
+        -e: every process
+        -l: long format
+        -f: full Format
+  . List Containers:
+
+      $ docker ps
+      $ docker ps -a #(all containers)
+      $ docker ps -aq #(only the IDs of all the containers)
+  . Build Image out of a Dockerfile
+
+      $ docker build -t test:latest . #(-t means tag, do the image will be named test:latest)
+  . Run a container from an Image:
+
+      $ docker run -d --name web1 publish 8080:8080 test:latest #(-d means detach)
