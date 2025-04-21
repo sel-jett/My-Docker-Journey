@@ -369,3 +369,24 @@ go search for --debugger flag.
       Digest: sha256:02bb6f428431...9a33cb1af4444c9b11
       Status: Downloaded newer image for alpine@sha256:02bb6f428431...9a33cb1af4444c9b11
       docker.io/library/alpine@sha256:02bb6f428431...9a33cb1af4444c9b11
+
+   . Run a container an remove it as it begins :
+
+      $ docker run --rm golang go version.
+
+   . Build your own build for different plateforms and architectures with docker buildx and docker manifest create :
+
+      $ docker buildx build --platform linux/arm/v7 -t myimage:arm-v7 .
+   . Delete image by ID :
+
+      $ docker rmi 44dd6f223004
+   . Delete multiple images :
+
+      $ docker rmi f70734b6a266 a4d3716dbb72
+
+   . Delete All images :
+
+      $ docker rmi $(docker images -q) -f
+   . Start a container :
+
+      $ ddocker run -it ubuntu /bin/bash
