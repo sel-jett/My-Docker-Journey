@@ -275,7 +275,7 @@ go search for --debugger flag.
     $ docker images || docker image ls
   . Pull image:
 
-    $ docker pull (image name if exist in docker hub
+    $ docker pull <repository>:<tag>
   . Launch a container from a docker image:
 
     $ docker run -it (image name) /bin/bash
@@ -300,3 +300,72 @@ go search for --debugger flag.
   . Run a container from an Image:
 
       $ docker run -d --name web1 publish 8080:8080 test:latest #(-d means detach)
+  . Pulling from an unofficial repository:
+
+      $ docker pull <Organisation name/Username>/<repo>:<tag>
+   . Pulling from 3rd party registries (not Docker Hub):
+
+      $ docker pull gcr.io/google-containers/git-sync:v3.1.5
+   
+   . Pulling all images from a repo:
+
+      $ docker pull -a nigelpoulton/tu-demo
+
+   . Docker --filter:
+
+      $ docker images --filter dangling=true
+      # List images created before a specific image
+      $ docker images --filter "before=ubuntu:latest"
+
+      # List images created after a specific image
+      $ docker images --filter "since=alpine:3.14"
+
+      # List images created before a specific timestamp
+      $ docker images --filter "before=2023-01-01"
+
+      # List images created since a specific timestamp
+      $ docker images --filter "since=2024-01-01"
+
+      # List images with a specific label
+      $ docker images --filter "label=maintainer"
+      
+      # List images with specific label value
+      $ docker images --filter "label=version=1.0"
+
+      # List images with multiple labels (AND condition)
+      $ docker images --filter "label=environment=production" --filter "label=app=webserver"
+
+
+   . Searching Docker Hub from the CLI:
+
+      $ docker search nigelpoulton
+
+      # Default limit is 25 line.
+      $ docker search alpine --limit 100
+
+      $ docker search alpine --filter "is-official=true
+    
+  . Commands that create a Layer:
+      . RUN
+      . COPY
+      . ADD
+
+   . Inspect image :
+
+      $ docker inspect ubuntu:latest
+
+   . Digest :
+
+      $ docker images --digests <REPOSITORY>
+      $ docker rmi alpine:latest
+      Untagged: alpine:latest
+      Untagged: alpine@sha256:02bb6f428431fbc2809c5d1b41eab5a68350194fb508869a33cb1af4444c9b11
+      Deleted: sha256:44dd6f2230041eede4ee5e792728313e43921b3e46c1809399391535c0c0183b
+      Deleted: sha256:94dd7d531fa5695c0c033dcb69f213c2b4c3b5a3ae6e497252ba88da87169c3f
+      
+      $ docker pull alpine@sha256:02bb6f428431fbc2809c5d1b41eab5a68350194fb508869a33cb1af4444c9b11
+      docker.io/library/alpine@sha256:02bb6f42...44c9b11: Pulling from library/alpine
+      08409d417260: Pull complete
+      Digest: sha256:02bb6f428431...9a33cb1af4444c9b11
+      Status: Downloaded newer image for alpine@sha256:02bb6f428431...9a33cb1af4444c9b11
+      docker.io/library/alpine@sha256:02bb6f428431...9a33cb1af4444c9b11
