@@ -350,6 +350,15 @@ go search for --debugger flag.
       . COPY
       . ADD
 
+# Multi-architecture images:
+  . manifest lists: a list of architectures supported by a particular image tag. Each supported architecture then has its own manifest that lists the layers used to build it. 
+  . manifests
+![image](https://github.com/user-attachments/assets/0735577a-e58b-45de-b19e-be89bf0e8493)
+
+  . inspect the manifest list of any image on Docker Hub.
+
+    $ docker manifest inspect golang | grep 'architecture\|os'
+
    . Inspect image :
 
       $ docker inspect ubuntu:latest
@@ -390,3 +399,7 @@ go search for --debugger flag.
    . Start a container :
 
       $ ddocker run -it ubuntu /bin/bash
+
+
+
+  
