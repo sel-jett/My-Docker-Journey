@@ -400,6 +400,24 @@ go search for --debugger flag.
 
       $ ddocker run -it ubuntu /bin/bash
 
+# Self-healing containers with restart policies:
+   . always
+   . unless-stopped
+   . on-failure
 
 
+   * always: it always restarts a failed container unless itś been explicitly stopped. "--restart always"
+   * unless-stopped: The main difference between the always and unless-stopped policies is that containers
+                     with the --restart unless-stopped policy will not be restarted when the daemon
+                     restarts if they were in the Stopped (Exited) state.
+   * on-failure: restart a container with a non-zero exit code. It will also restart containers when the 
+                 Docker darmon restarts, even ones that where in the stopped state.
+
+# Volumes :
+. The data created in this example is stored on the Docker hosts local filesystem. If
+the Docker host fails, the data will be lost.
+. Containers are designed to be immutable objects and it’s not a good practice to
+write data to them
+    For these reasons, Docker provides volumes. These exist outside of containers but can be
+mounted into them.
   
