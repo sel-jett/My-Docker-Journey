@@ -413,6 +413,17 @@ go search for --debugger flag.
    * on-failure: restart a container with a non-zero exit code. It will also restart containers when the 
                  Docker darmon restarts, even ones that where in the stopped state.
 
+# Squash the image:
+    $ docker build --squash
+   .Squashed images are particularly useful when you want to distribute a final image without exposing build 
+  details or when you need to minimize image size, but they sacrifice the layer caching that makes iterative 
+  Docker builds efficient.
+
+   .Entire image is unique. Entire image needs pushing.
+
+# Compose:
+
+
 # Volumes :
 . The data created in this example is stored on the Docker hosts local filesystem. If
 the Docker host fails, the data will be lost.
