@@ -422,7 +422,15 @@ go search for --debugger flag.
    .Entire image is unique. Entire image needs pushing.
 
 # Compose:
-
+   .*docker compose up* is the command to deploy a Compose app. It creates all images, containers, networks and volumes needed by the app.
+   It expects the Compose file to be called compose.yaml but you can specify a custom file name with the -f flag. It's common to start the app
+   in the background with the --detach flag.
+   .*docker compose stop* will stop all containers in a Compose app without deleting them from the system. They can be easily restarted with *docker compose restart*
+   .*docker compose rm* will delete a stopped Compose app. It will delete containers and networks, but it won't delete volumes and images by default.
+   .*docker compose restart* will restart a Compose app that has been stopped with *docker compose stop*. If you make changes to your Compose app while it's
+   stopped, these changes will not appear in the restarted app. You need to re-deploy the app to get the changes.
+   .*docker compose ps* lists each container in the Compose app. It shows current state, the command running insisde each contrainer, and network ports.
+   .*docker compose down* will stop and delete a running Compose app. It deletes conatiners and networks, but not volumes and images.
 
 # Volumes :
 . The data created in this example is stored on the Docker hosts local filesystem. If
@@ -431,4 +439,18 @@ the Docker host fails, the data will be lost.
 write data to them
     For these reasons, Docker provides volumes. These exist outside of containers but can be
 mounted into them.
-  
+
+    volumes:
+        counter-vol:
+    services:
+        web-fe:
+            volumes:
+                - type: volume
+                    source: counter-vol
+                    target: /app
+  We can make changes to files in the volume, from the outside of the container, and have them reflected immediatly in the app.
+  Here's how it works:
+      . Step by Step process:
+          . Update the contents of app/templates/index.html in the project's build context.
+          . Copy the updated index.html to the container's volume (this resides on the Docker host filesystem).
+          . Refresh the web page and see the updates.
