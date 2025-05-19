@@ -454,3 +454,19 @@ mounted into them.
           . Update the contents of app/templates/index.html in the project's build context.
           . Copy the updated index.html to the container's volume (this resides on the Docker host filesystem).
           . Refresh the web page and see the updates.
+
+# Docker Networking:
+       ![image](https://github.com/user-attachments/assets/fc21983b-cd0e-4cda-88f4-13d9472060e5)
+   .*The container Network model (CNM):* The design guid for docker networking. It outlines the fundamental building blocks of a docker network:
+       . *sandbox* an isolated network stack in a container. It includes Ethernet interfaces, ports, routing tables, and DNS config.
+       . *Endpoints* are virtual network interfaces. Like normal network interfaces, these are responsible for making connections. For example, 
+       endpoints to connect sandboxes to networks.
+       . *Networks* are a software implementation of a switch (802.1d bridge). As such, they group together and isolate a collection of endpoints that
+       need to communicate.
+    . *libnetwork*: In the early days of Dockerm all networking code existed inside the deamon. This was a nightmare and didnt follow the Unix principale
+    of building modular tools that can work on their own, but also be easily composed into other projects. As resuslt the network code got ripped out 
+    and refactored into an external library called ~libnetwork~ based on the principales of the CNM.
+    
+
+
+        
