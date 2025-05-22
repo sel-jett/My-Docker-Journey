@@ -3,6 +3,7 @@
 set -e
 
 service mariadb start
+sleep 5
 
 mariadb -uroot -e "CREATE DATABASE IF NOT EXISTS USERS"
 mariadb -uroot -e "CREATE USER IF NOT EXISTS salah@'%' IDENTIFIED BY '123456789'"
