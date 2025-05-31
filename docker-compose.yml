@@ -1,6 +1,11 @@
-version: '3.8'
-
 services:
+
+  nginx:
+    build:
+      context: ./src/Nginx
+    ports:
+      - "443:443"
+    
   wordpress:
     build: 
       context: ./src/WordPress
@@ -18,10 +23,10 @@ services:
     env_file:
       - .env
     environment:
-      - MYSQL_DATABASE=${WORDPRESS_DB_NAME}
-      - MYSQL_USER=${WORDPRESS_DB_USER}
-      - MYSQL_PASSWORD=${WORDPRESS_DB_PASSWORD}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=wordpress_user
+      - MYSQL_PASSWORD=your_secure_password
+      - MYSQL_ROOT_PASSWORD=your_secure_root_password
     volumes:
       - db_data:/var/lib/mysql
 

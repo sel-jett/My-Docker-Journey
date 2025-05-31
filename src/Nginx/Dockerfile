@@ -13,4 +13,6 @@ COPY nginx.conf /etc/nginx/sites-enabled
 
 EXPOSE 443
 
+WORKDIR /var/www/html
+
 CMD ["nginx", "-g", "daemon off;"]
