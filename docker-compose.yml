@@ -1,35 +1,42 @@
 services:
-
-  nginx:
+  db:
     build:
-      context: ./src/Nginx
-    ports:
-      - "443:443"
-    
+      context: ./src/MariaDB
+    container_name: mariadb
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - wordpress_network
+
   wordpress:
     build: 
       context: ./src/WordPress
-    env_file:
-      - .env
-    ports:
-      - "9000:9000"
+    container_name: wordpress
     volumes:
       - wordpress_data:/var/www/html
+    networks:
+      - wordpress_network
     depends_on:
       - db
-
-  db:
-    image: mariadb:latest
-    env_file:
-      - .env
-    environment:
-      - MYSQL_DATABASE=wordpress
-      - MYSQL_USER=wordpress_user
-      - MYSQL_PASSWORD=your_secure_password
-      - MYSQL_ROOT_PASSWORD=your_secure_root_password
+    
+  nginx:
+    build:
+      context: ./src/Nginx
+    container_name: nginx
+    ports:
+      - "4443:443"
     volumes:
-      - db_data:/var/lib/mysql
+      - wordpress_data:/var/www/html
+    networks:
+      - wordpress_network
+    depends_on:
+      - wordpress
+
 
 volumes:
   wordpress_data:
-  db_data: 
+  db_data:
+
+networks:
+  wordpress_network:
+    driver: bridge

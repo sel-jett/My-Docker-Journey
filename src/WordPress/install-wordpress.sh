@@ -33,7 +33,7 @@ wp config create --allow-root \
 echo "Installing WordPress..."
 
 wp core install --allow-root \
-    --url="localhost" \
+    --url="https://localhost:4443" \
     --title="obama" \
     --admin_user="admin" \
     --admin_password="admin" \
@@ -46,12 +46,8 @@ echo "WordPress installed successfully!"
 sed -i -e 's|/run/php/php7.4-fpm.sock|0.0.0.0:9000|g' /etc/php/7.4/fpm/pool.d/www.conf
 
 
-echo "hna1"
-
 service php7.4-fpm start
 service php7.4-fpm stop
-
-echo "hna2"
 
 php-fpm7.4 -F
 
