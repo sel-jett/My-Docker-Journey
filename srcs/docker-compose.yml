@@ -1,9 +1,14 @@
 services:
   db:
     build:
-      context: ./src/MariaDB
+      context: ./requirements/MariaDB
     image: mariadb:jett
     container_name: mariadb
+    environment:
+      MARIADB_db: wordpress
+      MARIADB_user: salah
+      MARIADB_password: '123456789'
+      MARIADB_host: mariadb
     volumes:
       - db_data:/var/lib/mysql
     networks:
@@ -12,9 +17,20 @@ services:
 
   wordpress:
     build: 
-      context: ./src/WordPress
+      context: ./requirements/WordPress
     image: wordpress:jett
     container_name: wordpress
+    environment:
+      MARIADB_db: wordpress
+      MARIADB_user: salah
+      MARIADB_password: '123456789'
+      MARIADB_host: mariadb
+      url: 'https://localhost:4443'
+      title: 'jett'
+      admin_user: '7loban'
+      admin_password: 'sakserbellak'
+      admin_email: '7loban@gmail.com'
+
     volumes:
       - wordpress_data:/var/www/html
     networks:
@@ -25,7 +41,7 @@ services:
     
   nginx:
     build:
-      context: ./src/Nginx
+      context: ./requirements/Nginx
     image: nginx:jett
     container_name: nginx
     ports:

@@ -42,10 +42,10 @@ if [ ! -f "wp-config.php" ]; then
     echo "Creating WordPress configuration..."
 
     wp config create --allow-root \
-        --dbname="wordpress" \
-        --dbuser="salah" \
-        --dbpass="123456789" \
-        --dbhost="mariadb"
+        --dbname=$MARIADB_db \
+        --dbuser=$MARIADB_user \
+        --dbpass=$MARIADB_password \
+        --dbhost=$MARIADB_host
 
     echo "WordPress configuration installed successfuly"
 else
@@ -58,11 +58,11 @@ if ! wp core is-installed --allow-root 2>/dev/null; then
     echo "Installing WordPress..."
 
     wp core install --allow-root \
-        --url="https://localhost:4443" \
-        --title="obama" \
-        --admin_user="7loban" \
-        --admin_password="sakserbellak" \
-        --admin_email="7loban@gmail.com"
+        --url=$url \
+        --title=$title \
+        --admin_user=$admin_user \
+        --admin_password=$admin_password \
+        --admin_email=$admin_email
 
     echo "WordPress installed successfully!"
 else

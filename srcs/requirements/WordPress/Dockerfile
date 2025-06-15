@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
     php-mysql \
     mariadb-client
 
-COPY install-wordpress.sh /
+COPY ./tools/install-wordpress.sh /
 
 RUN chmod +x /install-wordpress.sh
 

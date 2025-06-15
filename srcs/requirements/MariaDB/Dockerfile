@@ -1,6 +1,6 @@
 FROM debian:bullseye
 
-COPY ./mariadb.sh ./mariadb.sh
+COPY ./tools/mariadb.sh ./mariadb.sh
 
 RUN apt-get update && \
     apt-get install -y mariadb-server && \
