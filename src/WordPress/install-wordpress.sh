@@ -4,13 +4,21 @@ echo "Installing WordPress..."
 
 set -e
 
-curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+sleep 10
 
-echo "Downloading WordPress..."
+if ! command -v wp &> /dev/null; then
+    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
-chmod +x wp-cli.phar
+    echo "Downloading WordPress..."
 
-mv wp-cli.phar /usr/local/bin/wp
+    chmod +x wp-cli.phar
+
+    mv wp-cli.phar /usr/local/bin/wp
+
+    echo "wp installed successfuly"
+else
+    echo "wp already installed"
+fi
 
 echo "Creating WordPress directory..."
 
@@ -18,28 +26,48 @@ mkdir -p /var/www/html
 
 cd /var/www/html
 
-echo "Downloading WordPress core..."
+if [ ! -f "wp-congfig-sample.php" ] && [ ! -f "wp-config.php" ]; then
 
-wp core download --allow-root
+    echo "Downloading WordPress core..."
 
-echo "Creating WordPress configuration..."
+    wp core download --allow-root
 
-wp config create --allow-root \
-    --dbname="wordpress" \
-    --dbuser="salah" \
-    --dbpass="123456789" \
-    --dbhost="mariadb"
+    echo "WordPress core downloaded succesfully"
+else
+    echo "WordPress core... already installed"
+fi
 
-echo "Installing WordPress..."
+if [ ! -f "wp-config.php" ]; then
 
-wp core install --allow-root \
-    --url="https://localhost:4443" \
-    --title="obama" \
-    --admin_user="admin" \
-    --admin_password="admin" \
-    --admin_email="admin@gmail.com"
+    echo "Creating WordPress configuration..."
 
-echo "WordPress installed successfully!"
+    wp config create --allow-root \
+        --dbname="wordpress" \
+        --dbuser="salah" \
+        --dbpass="123456789" \
+        --dbhost="mariadb"
+
+    echo "WordPress configuration installed successfuly"
+else
+    echo "WordPress configuration already installed"
+fi
+
+
+if ! wp core is-installed --allow-root 2>/dev/null; then
+
+    echo "Installing WordPress..."
+
+    wp core install --allow-root \
+        --url="https://localhost:4443" \
+        --title="obama" \
+        --admin_user="7loban" \
+        --admin_password="sakserbellak" \
+        --admin_email="7loban@gmail.com"
+
+    echo "WordPress installed successfully!"
+else
+    echo "WordPress already installed!"
+fi
 
 
 

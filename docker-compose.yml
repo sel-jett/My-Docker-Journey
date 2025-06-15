@@ -2,26 +2,31 @@ services:
   db:
     build:
       context: ./src/MariaDB
+    image: mariadb:jett
     container_name: mariadb
     volumes:
       - db_data:/var/lib/mysql
     networks:
       - wordpress_network
+    restart: unless-stopped
 
   wordpress:
     build: 
       context: ./src/WordPress
+    image: wordpress:jett
     container_name: wordpress
     volumes:
       - wordpress_data:/var/www/html
     networks:
       - wordpress_network
+    restart: unless-stopped
     depends_on:
       - db
     
   nginx:
     build:
       context: ./src/Nginx
+    image: nginx:jett
     container_name: nginx
     ports:
       - "4443:443"
@@ -29,13 +34,24 @@ services:
       - wordpress_data:/var/www/html
     networks:
       - wordpress_network
+    restart: unless-stopped
     depends_on:
       - wordpress
 
 
 volumes:
   wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/sel-jett/goinfre/volumes/wordpress
+      o: bind
   db_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/sel-jett/goinfre/volumes/mariadb
+      o: bind
 
 networks:
   wordpress_network:
