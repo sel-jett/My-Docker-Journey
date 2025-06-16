@@ -46,6 +46,8 @@ services:
     container_name: nginx
     ports:
       - "4443:443"
+    environment:
+      DOMAIN_NAME: ${DOMAIN_NAME}
     volumes:
       - wordpress_data:/var/www/html
     networks:
