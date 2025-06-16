@@ -30,6 +30,9 @@ services:
       admin_user: ${admin_user}
       admin_password: ${admin_password}
       admin_email: ${admin_email}
+      author_user: ${author_user}
+      author_email: ${author_email}
+      author_password: ${author_password}
 
     volumes:
       - wordpress_data:/var/www/html
@@ -45,7 +48,7 @@ services:
     image: nginx:jett
     container_name: nginx
     ports:
-      - "4443:443"
+      - "443:443"
     environment:
       DOMAIN_NAME: ${DOMAIN_NAME}
     volumes:
@@ -62,13 +65,13 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/sel-jett/goinfre/volumes/wordpress
+      device: /home/sel-jett/data/wordpress
       o: bind
   db_data:
     driver: local
     driver_opts:
       type: none
-      device: /home/sel-jett/goinfre/volumes/mariadb
+      device: /home/sel-jett/data/mariadb
       o: bind
 
 networks:

@@ -7,7 +7,7 @@ RUN apt-get update && \
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout /etc/ssl/private/nginx-selfsigned.key \
     -out /etc/ssl/certs/nginx-selfsigned.crt \
-    -subj "/C=MA/ST=salah/L=jett/O=Dis/CN=localhost"
+    -subj "/C=MA/ST=salah/L=Morocco/O=42/CN=sel-jett.42.fr"
 
 COPY nginx.conf /etc/nginx/sites-enabled
 

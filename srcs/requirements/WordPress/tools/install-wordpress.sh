@@ -69,7 +69,17 @@ else
     echo "WordPress already installed!"
 fi
 
+echo "Creating WordPress author..."
 
+if wp user get "$author_user" --field=ID --allow-root > /dev/null 2>&1; then
+    echo "User $author_user already exist"
+else
+    wp user create "$author_user" "$author_email" \
+        --role=author \
+        --user_pass="$author_password" \
+        --allow-root
+    echo "Author user created successfully!"
+fi
 
 sed -i -e 's|/run/php/php7.4-fpm.sock|0.0.0.0:9000|g' /etc/php/7.4/fpm/pool.d/www.conf
 
