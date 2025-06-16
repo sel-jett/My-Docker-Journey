@@ -5,10 +5,10 @@ services:
     image: mariadb:jett
     container_name: mariadb
     environment:
-      MARIADB_db: wordpress
-      MARIADB_user: salah
-      MARIADB_password: '123456789'
-      MARIADB_host: mariadb
+      MARIADB_db: ${MARIADB_db}
+      MARIADB_user: ${MARIADB_user}
+      MARIADB_password: ${MARIADB_password}
+      MARIADB_host: ${MARIADB_host}
     volumes:
       - db_data:/var/lib/mysql
     networks:
@@ -21,15 +21,15 @@ services:
     image: wordpress:jett
     container_name: wordpress
     environment:
-      MARIADB_db: wordpress
-      MARIADB_user: salah
-      MARIADB_password: '123456789'
-      MARIADB_host: mariadb
-      url: 'https://localhost:4443'
-      title: 'jett'
-      admin_user: '7loban'
-      admin_password: 'sakserbellak'
-      admin_email: '7loban@gmail.com'
+      MARIADB_db: ${MARIADB_db}
+      MARIADB_user: ${MARIADB_user}
+      MARIADB_password: ${MARIADB_password}
+      MARIADB_host: ${MARIADB_host}
+      url: ${url}
+      title: ${title}
+      admin_user: ${admin_user}
+      admin_password: ${admin_password}
+      admin_email: ${admin_email}
 
     volumes:
       - wordpress_data:/var/www/html
